@@ -1,0 +1,8 @@
+.status-screen {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-parchment-dim);
+}

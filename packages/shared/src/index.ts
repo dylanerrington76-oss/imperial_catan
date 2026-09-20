@@ -1,4 +1,6 @@
 export * from "./hex/index.js";
+export * from "./game/index.js";
+export * from "./network/index.js";
 
 export interface Greeting {
   message: string;

@@ -32,3 +32,13 @@ export function hexagonCoordinates(radius: number): AxialCoordinate[] {
 export function hexagonCellCount(radius: number): number {
   return 3 * radius * radius + 3 * radius + 1;
 }
+
+/**
+ * Stable string key for an axial coordinate, e.g. `"3,-2"`. `Hex`/`Board`
+ * (see `./types.js`) are pure seeded geometry and carry no id of their own;
+ * this is how the mutable, per-hex game state in `../game/types.js`
+ * (`HexId`, `HexState`) is keyed and cross-referenced against them.
+ */
+export function hexId(coordinate: AxialCoordinate): string {
+  return `${coordinate.q},${coordinate.r}`;
+}

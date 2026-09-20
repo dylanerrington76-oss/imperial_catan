@@ -1,0 +1,44 @@
+:root {
+  /* Chart-table palette: a lamp-lit map table, not a generic dark-mode default. */
+  --color-table: #16232f;
+  --color-table-raised: #1d2e3d;
+  --color-parchment: #efe6d0;
+  --color-parchment-dim: #e3d8bc;
+  --color-ink: #1b2a3a;
+  --color-ink-soft: #4a5a68;
+  --color-brass: #c98a3b;
+  --color-brass-dark: #a76c28;
+
+  /* Rulebook resource colors (Catan_rules.docx: "Four types of cards and
+     their color") - reused for the board's hex fills and any resource UI. */
+  --resource-wood: #4b7b4b;
+  --resource-brick: #a6432e;
+  --resource-wheat: #d6a929;
+  --resource-stone: #8b8b85;
+  --color-water: #2f5670;
+  --color-water-line: #1c3140;
+
+  --color-danger: var(--resource-brick);
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

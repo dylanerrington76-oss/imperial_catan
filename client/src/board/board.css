@@ -1,0 +1,18 @@
+.game-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-screen__board-area {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+}
+
+.hex-board canvas {
+  display: block;
+}

@@ -6,10 +6,16 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "dev": "tsx watch src/index.ts",
     "build": "tsc -b .",
     "test": "vitest run"
   },
   "dependencies": {
-    "@monorepo/shared": "0.0.0"
+    "@monorepo/shared": "0.0.0",
+    "socket.io": "^4.8.3"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.3",
+    "tsx": "^4.23.15"
   }
 }
