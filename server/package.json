@@ -6,9 +6,10 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc -b .",
-    "test": "vitest run"
+  "dev": "tsx watch src/index.ts",
+  "build": "tsc -b .",
+  "start": "node dist/index.js",
+  "test": "vitest run"
   },
   "dependencies": {
     "@monorepo/shared": "0.0.0",

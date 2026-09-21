@@ -32,12 +32,12 @@ export function createApp(): App {
   };
 }
 
-const isMain = import.meta.url === `file://${process.argv[1]}`;
-if (isMain) {
-  const port = Number(process.env.PORT ?? 3000);
-  const { httpServer } = createApp();
-  httpServer.listen(port, () => {
-    console.log(`Imperial Catan server listening on http://localhost:${port}`);
-    console.log(`Run \`cloudflared tunnel --url http://localhost:${port}\` to get a shareable link for the group.`);
-  });
-}
+const port = Number(process.env.PORT ?? 3000);
+const { httpServer } = createApp();
+
+httpServer.listen(port, () => {
+  console.log(`Imperial Catan server listening on http://localhost:${port}`);
+  console.log(
+    `Run \`cloudflared tunnel --url http://localhost:${port}\` to get a shareable link for the group.`,
+  );
+});
