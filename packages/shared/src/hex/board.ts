@@ -1,4 +1,4 @@
-import { areAdjacent, axialDistance, hexagonCellCount, hexagonCoordinates } from "./coordinates.js";
+import { areAdjacent, hexagonCellCount, hexagonCoordinates } from "./coordinates.js";
 import { createRng, seededShuffle, type Rng } from "./rng.js";
 import { isTerritoryHex } from "./types.js";
 import type { AxialCoordinate, Board, Resource, TerritoryHex, WaterHex } from "./types.js";
@@ -145,22 +145,27 @@ function pickLandAndWater(
   allCoordinates: readonly AxialCoordinate[],
   rng: Rng,
 ): { land: AxialCoordinate[]; water: AxialCoordinate[] } {
-  const center: AxialCoordinate = { q: 0, r: 0 };
+  // Make a seeded copy so the original coordinate list is not modified.
+  const shuffled = [...allCoordinates];
 
-  // Rank every hex by distance from center plus a small seeded jitter, so
-  // the coastline is an organic blob rather than a perfect circle, while
-  // staying fully determined by the seed.
-  const ranked = allCoordinates
-    .map((coord) => ({ coord, score: axialDistance(coord, center) + rng() * 0.9 }))
-    .sort((a, b) => a.score - b.score);
+  // Fisher-Yates shuffle using the seeded RNG.
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
 
-  const land = ranked.slice(0, TERRITORY_HEX_COUNT).map((entry) => entry.coord);
-  const water = ranked.slice(TERRITORY_HEX_COUNT).map((entry) => entry.coord);
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
 
-  // Stable ordering (independent of the jitter above) before assigning
-  // resources/numbers, so the seeded shuffles are the only remaining
-  // source of placement randomness.
+  // The first 55 randomly selected hexes are land.
+  const land = shuffled.slice(0, TERRITORY_HEX_COUNT);
+
+  // The remaining 162 are water.
+  const water = shuffled.slice(TERRITORY_HEX_COUNT);
+
+  // Keep deterministic ordering before assigning resources/numbers.
   land.sort((a, b) => a.q - b.q || a.r - b.r);
+  water.sort((a, b) => a.q - b.q || a.r - b.r);
 
   return { land, water };
 }

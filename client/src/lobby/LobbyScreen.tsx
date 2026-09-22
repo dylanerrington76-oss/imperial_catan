@@ -80,7 +80,7 @@ export function LobbyScreen({ socket, lobby, myPlayerId, onJoined }: LobbyScreen
           <form className="lobby__form" onSubmit={handleJoin}>
             <label className="lobby__field">
               <span>Your name</span>
-              <input value={name} onChange={(event) => setName(event.target.value)} maxLength={20} placeholder="Admiral of the Fleet" required />
+              <input value={name} onChange={(event) => setName(event.target.value)} maxLength={15} placeholder="Name" required />
             </label>
             <fieldset className="lobby__colors">
               <legend>Choose a color</legend>
