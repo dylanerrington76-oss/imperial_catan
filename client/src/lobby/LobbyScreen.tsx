@@ -1,6 +1,7 @@
 import type { JoinLobbyResult, LobbyState, PlayerColor, StartGameResult } from "@monorepo/shared";
 import { canJoinLobby, canStartGame, PLAYER_COLORS, REQUIRED_PLAYER_COUNT } from "@monorepo/shared";
 import { type FormEvent, useState } from "react";
+import { PLAYER_COLOR_HEX } from "../playerColors.js";
 import type { GameSocket } from "../socket.js";
 import "./lobby.css";
 
@@ -10,13 +11,6 @@ interface LobbyScreenProps {
   myPlayerId: string | null;
   onJoined: (playerId: string) => void;
 }
-
-const COLOR_SWATCH: Record<PlayerColor, string> = {
-  Red: "var(--resource-brick)",
-  Blue: "var(--color-water)",
-  White: "#e8e2d2",
-  Orange: "var(--color-brass)",
-};
 
 export function LobbyScreen({ socket, lobby, myPlayerId, onJoined }: LobbyScreenProps) {
   const [name, setName] = useState("");
@@ -92,7 +86,7 @@ export function LobbyScreen({ socket, lobby, myPlayerId, onJoined }: LobbyScreen
                       key={swatchColor}
                       type="button"
                       className={`lobby__swatch${color === swatchColor ? " lobby__swatch--selected" : ""}`}
-                      style={{ background: COLOR_SWATCH[swatchColor] }}
+                      style={{ background: PLAYER_COLOR_HEX[swatchColor] }}
                       disabled={taken}
                       aria-pressed={color === swatchColor}
                       aria-label={taken ? `${swatchColor} (taken)` : swatchColor}
@@ -123,7 +117,7 @@ export function LobbyScreen({ socket, lobby, myPlayerId, onJoined }: LobbyScreen
         <ul className="lobby__roster">
           {players.map((player) => (
             <li key={player.id} className="lobby__roster-row">
-              <span className="lobby__swatch-dot" style={{ background: COLOR_SWATCH[player.color] }} />
+              <span className="lobby__swatch-dot" style={{ background: PLAYER_COLOR_HEX[player.color] }} />
               <span className="lobby__roster-name">
                 {player.name}
                 {player.id === me.id ? " (you)" : ""}
